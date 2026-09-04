@@ -2,9 +2,7 @@ import { chromium as playwrightChromium, type Browser, type BrowserContext } fro
 
 // Next.js dev-mode hot reload re-evaluates modules on every edit, which would
 // otherwise leak a new browser process each time. Stashing the singleton on
-// globalThis survives module reloads within the same server process. On
-// Vercel it also lets a warm serverless function instance reuse the browser
-// across requests instead of relaunching it every time.
+// globalThis survives module reloads within the same server process.
 declare global {
   // eslint-disable-next-line no-var
   var __lbBrowser: Promise<Browser> | undefined;
@@ -13,21 +11,10 @@ declare global {
 }
 
 async function launchBrowser(): Promise<Browser> {
-  if (process.env.VERCEL) {
-    // Vercel's serverless functions have no display and can't bundle a full
-    // ~300MB local Chromium install, so use the Lambda-optimized build.
-    const { default: chromium } = await import("@sparticuz/chromium");
-    return playwrightChromium.launch({
-      args: chromium.args,
-      executablePath: await chromium.executablePath(),
-      headless: true,
-    });
-  }
-
-  // Local dev: the full browser installed via `npx playwright install
-  // chromium`. Headful (not headless) — found empirically to be
-  // noticeably more reliable at passing Cloudflare's JS challenge. In
-  // Docker there's no display to be headful with, so DOCKER=1 (set in
+  // The full browser installed via `npx playwright install chromium`.
+  // Headful (not headless) — found empirically to be noticeably more
+  // reliable at passing Cloudflare's JS challenge. In Docker there's no
+  // display to be headful with, so DOCKER=1 (set in
   // homeserver/docker-compose.yml) forces headless there instead.
   return playwrightChromium.launch({
     headless: Boolean(process.env.DOCKER),

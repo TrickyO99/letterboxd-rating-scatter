@@ -64,7 +64,7 @@ export default function Home() {
         <div className="text-center space-y-3 max-w-xl">
           <p
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em]"
-            style={{ color: "var(--orange-bright)" }}
+            style={{ color: "var(--orange)" }}
           >
             <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
               <polyline points="3,3 3,19 19,19" />
@@ -76,7 +76,7 @@ export default function Home() {
             Letterboxd, plotted
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.05]" style={{ color: "var(--cream)" }}>
-            Scatter<span style={{ color: "var(--orange-bright)" }}>boxd</span>
+            Scatter<span style={{ color: "var(--orange)" }}>boxd</span>
           </h1>
           <p style={{ color: "var(--muted)" }}>
             Enter a public Letterboxd username to plot your ratings against each film&apos;s TMDB
@@ -91,7 +91,7 @@ export default function Home() {
             onChange={(e) => setUsername(e.target.value)}
             placeholder="letterboxd username"
             className="flex-1 rounded-full border px-4 py-2 text-sm outline-none transition-colors focus:border-[var(--orange)]"
-            style={{ borderColor: "var(--border)", background: "var(--card)", color: "var(--cream)" }}
+            style={{ borderColor: "var(--border)", background: "var(--card)", backdropFilter: "var(--glass-blur)", WebkitBackdropFilter: "var(--glass-blur)" as string, boxShadow: "var(--glass-shadow)", color: "var(--cream)" }}
           />
           <button
             type="submit"
@@ -118,7 +118,7 @@ export default function Home() {
         {error && (
           <p
             className="text-sm rounded-full border px-4 py-2"
-            style={{ borderColor: "var(--danger)", color: "var(--danger)", background: "var(--card)" }}
+            style={{ borderColor: "var(--danger)", color: "var(--danger)", background: "var(--card)", backdropFilter: "var(--glass-blur)", WebkitBackdropFilter: "var(--glass-blur)" as string, boxShadow: "var(--glass-shadow)" }}
           >
             {error}
           </p>
@@ -133,7 +133,7 @@ export default function Home() {
                 .env.local — without it, nothing can be plotted.
               </p>
             ) : (
-              <div className="rounded-2xl border p-5 sm:p-8 flex flex-col gap-4" style={{ borderColor: "var(--border)", background: "var(--card)" }}>
+              <div className="rounded-2xl border p-5 sm:p-8 flex flex-col gap-4" style={{ borderColor: "var(--border)", background: "var(--card)", backdropFilter: "var(--glass-blur)", WebkitBackdropFilter: "var(--glass-blur)" as string, boxShadow: "var(--glass-shadow)" }}>
                 <div className="flex flex-wrap justify-center gap-8 text-center">
                   <Stat label="Films plotted" value={result.points.length.toLocaleString()} accent />
                   {yourAvg !== null && <Stat label="Your average" value={yourAvg.toFixed(2)} />}
@@ -156,7 +156,7 @@ export default function Home() {
                 <div className="flex justify-center">
                   <button
                     onClick={() => setShowTable((v) => !v)}
-                    className="text-sm underline transition-colors hover:text-[var(--orange-bright)]"
+                    className="text-sm underline transition-colors hover:text-[var(--orange)]"
                     style={{ color: "var(--muted)" }}
                   >
                     {showTable ? "Hide table" : "Show as table"}
@@ -174,7 +174,7 @@ export default function Home() {
         className="relative z-10 border-t px-4 py-8 text-center text-sm sm:px-8"
         style={{ borderColor: "var(--border)", color: "var(--muted)", background: "rgba(15,25,90,0.35)" }}
       >
-        <a href="https://odtriki.com" className="font-medium hover:text-[var(--orange-bright)]" style={{ color: "var(--cream)" }}>
+        <a href="https://odtriki.com" className="font-medium hover:text-[var(--orange)]" style={{ color: "var(--cream)" }}>
           odtriki.com
         </a>
         <span aria-hidden className="inline-block mx-2 h-1 w-1 rounded-[1px] align-middle" style={{ background: "var(--orange)" }} />
@@ -189,7 +189,7 @@ function Stat({ label, value, accent }: { label: string; value: string; accent?:
     <div>
       <div
         className="font-serif text-2xl font-semibold"
-        style={{ color: accent ? "var(--orange-bright)" : "var(--cream)" }}
+        style={{ color: accent ? "var(--orange)" : "var(--cream)" }}
       >
         {value}
       </div>

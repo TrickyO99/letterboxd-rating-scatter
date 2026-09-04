@@ -3,7 +3,6 @@ import { fetchRatedFilms, LetterboxdError } from "@/lib/letterboxd";
 import { lookupFilms } from "@/lib/tmdb";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 300;
 
 // Fetching the user's own ratings still means scraping Letterboxd's diary,
 // paced by a shared rate limiter — a very large profile would otherwise turn
